@@ -8,25 +8,27 @@ FPGA Verified on AMD Artix-7 (107 mW, 689 LUTs) | Custom GDSII Silicon Layout (1
 
 ---
 
-## 🏛️ Architecture Highlights
-1. Dynamic Operand Isolation: Automatically detects low-magnitude operand states and gates the upper 16-bit adder/multiplier logic trees, eliminating redundant switching energy.
-2. 4-Lane INT8 SIMD Vector Mode: Reconfigures the 32-bit datapath into four parallel 8-bit dot-product lanes for AI inference workloads.
-3. Hardware Activation: Integrated single-cycle ReLU unit for zero-bubble inference pipelines.
+## 🏛️ Silicon ASIC Floorplan Architecture
+Floorplan Layout Structure (adaptive_ai_alu_chip.gds):
+- Outer Perimeter: 108 Peripheral Wire-Bond I/O Pads (Power, Clock, Inputs, Outputs)
+- Dual Power Ring: Concentric VDD (Core) and VSS (Ground) Low-IR-Drop Power Rings
+- Core Region: 4-Lane INT8 SIMD Dot-Product Multiply-Accumulate Engine
+- Adaptive Power Logic: 16-bit Dynamic Operand Isolation and Hardware ReLU
 
 ---
 
-## 🔬 Silicon Implementation & Physical Design
-- FPGA Implementation: Synthesized, placed, and routed on AMD Artix-7 (xc7a35tcsg324-1) with 100 MHz timing closure, 107 mW total power, and 689 Logic LUTs.
-- Custom CMOS ASIC Layout: Complete GDSII chip layout generated in KLayout (adaptive_ai_alu_chip.gds) featuring:
-  - 108 I/O peripheral wire-bond pads
-  - Dual concentric VDD and VSS low-IR-drop power rings
-  - Symmetrical power delivery grid across the compute core
+## 🔬 Silicon Implementation Scorecard
+- FPGA Target: Synthesized and routed on AMD Artix-7 (xc7a35tcsg324-1)
+- Timing: 100 MHz Timing Met (Zero Timing Violations)
+- Total Power: 107 mW
+- Resource Footprint: 689 Logic LUTs
+- Full-Custom ASIC Stream: layout/adaptive_ai_alu_chip.gds (Verified in KLayout)
 
 ---
 
 ## 📁 Repository Structure
-- rtl/ : Synthesizable Verilog/SystemVerilog sources and timing constraints
-- layout/ : Complete ASIC GDSII physical layout stream file (adaptive_ai_alu_chip.gds)
+- rtl/ : Synthesizable Verilog source files
+- layout/ : Physical GDSII layout stream file (adaptive_ai_alu_chip.gds)
 - reports/ : Synthesis, timing, and power consumption reports
 
 ---
